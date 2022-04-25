@@ -18,6 +18,6 @@ class WsConcat extends SqliteFunction
 
     public function handle(): callable
     {
-        return fn(string $sperator, ...$args) => $this->implementation($sperator, ...$args);
+        return fn (string $sperator, ...$args) => $this->implementation($sperator, ...$args);
     }
 }

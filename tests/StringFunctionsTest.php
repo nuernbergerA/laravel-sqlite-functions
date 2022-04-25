@@ -255,5 +255,3 @@ test('SPACE', function () {
     $this->expectQuery("SPACE(6)")
          ->toBe('      ');
 });
-
-

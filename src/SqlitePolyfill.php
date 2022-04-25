@@ -16,15 +16,14 @@ class SqlitePolyfill
     public function __construct(
         protected array $functions,
         protected ?PDO $pdo = null,
-    )
-    {
+    ) {
         $this->pdo ??= DB::connection()->getPdo();
     }
 
     protected function register(): void
     {
         foreach ($this->functions as $functionClass) {
-            $function = new $functionClass;
+            $function = new $functionClass();
             $this->pdo->sqliteCreateFunction($function->name(), $function->handle());
         }
     }
@@ -32,7 +31,7 @@ class SqlitePolyfill
     protected static function functions(string $directory): array
     {
         return array_map(
-            fn(string $path) => __NAMESPACE__.'\\'.$directory.'\\'.basename($path, '.php'),
+            fn (string $path) => __NAMESPACE__.'\\'.$directory.'\\'.basename($path, '.php'),
             glob(__DIR__.'/'.$directory.'/*.php')
         );
     }

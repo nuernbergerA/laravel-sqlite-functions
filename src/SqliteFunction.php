@@ -10,10 +10,10 @@ abstract class SqliteFunction
 
     public function handle(): callable
     {
-        if(! method_exists($this, 'implementation')) {
+        if (! method_exists($this, 'implementation')) {
             throw new BadMethodCallException($this->name().' is not implemented');
         }
 
-        return fn(...$args) => $this->implementation(...$args);
+        return fn (...$args) => $this->implementation(...$args);
     }
 }

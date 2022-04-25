@@ -5,8 +5,8 @@ namespace NuernbergerA\SqlitePolyfill\Tests;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Orchestra\Testbench\TestCase as Orchestra;
 use NuernbergerA\SqlitePolyfill\SqlitePolyfillServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 use Pest\Expectation;
 
 class TestCase extends Orchestra
