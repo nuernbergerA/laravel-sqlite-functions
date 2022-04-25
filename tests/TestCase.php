@@ -1,36 +1,36 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace NuernbergerA\SqlitePolyfill\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
+use NuernbergerA\SqlitePolyfill\SqlitePolyfillServiceProvider;
+use Pest\Expectation;
 
 class TestCase extends Orchestra
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
-    }
-
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
-            SkeletonServiceProvider::class,
+            SqlitePolyfillServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    public function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
+        //
+        //Schema::create('users', function (Blueprint $table) {
+        //    $table->id();
+        //    $table->string('name');
+        //    $table->timestamps();
+        //});
+    }
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
-        $migration->up();
-        */
+    public function expectQuery(string $query): Expectation
+    {
+        return expect(DB::query()->selectRaw($query)->value('*'));
     }
 }
