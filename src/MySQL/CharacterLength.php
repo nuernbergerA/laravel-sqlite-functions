@@ -6,6 +6,6 @@ class CharacterLength extends CharLength
 {
     public function name(): string
     {
-        return 'CHARACTER_LENGTH';
+        return 'character_length';
     }
 }

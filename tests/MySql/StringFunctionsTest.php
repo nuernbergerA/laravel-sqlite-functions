@@ -206,8 +206,9 @@ test('POSITION', function () {
 });
 
 test('QUOTE', function () {
-    $this->expectQuery("QUOTE('Don\'t!')")
-         ->toBe('Don\'t!');
+    // review
+    $this->expectQuery("QUOTE(\"Don't!\")")
+         ->toBe("Don\'t!");
     $this->expectQuery("QUOTE(NULL)")
          ->toBeNull();
 });

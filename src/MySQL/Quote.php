@@ -4,19 +4,19 @@ namespace NuernbergerA\SqlitePolyfill\MySQL;
 
 use NuernbergerA\SqlitePolyfill\SqliteFunction;
 
-class Concat extends SqliteFunction
+class Quote extends SqliteFunction
 {
     public function name(): string
     {
-        return 'concat';
+        return 'quote';
     }
 
-    public function implementation(...$strings): ?string
+    public function implementation($string): ?string
     {
-        if (in_array(null, $strings, true)) {
+        if ($string === null) {
             return null;
         }
 
-        return implode('', $strings);
+        return addslashes($string);
     }
 }
